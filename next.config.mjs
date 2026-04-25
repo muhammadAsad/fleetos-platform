@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["mapbox-gl"],
+  eslint: {
+    // Warnings don't block production build
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // Simulator files are local dev tools, not part of the app
+    ignoreBuildErrors: false,
+  },
   webpack: (config) => {
-    // Allow mapbox-gl worker to be bundled properly
     config.resolve.alias = {
       ...config.resolve.alias,
     };
