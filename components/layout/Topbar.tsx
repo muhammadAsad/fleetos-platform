@@ -62,12 +62,13 @@ export default function Topbar({ title }: TopbarProps) {
 
   // Load auth user — real Supabase first, fall back to localStorage (demo/mock mode)
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }: { data: { user: { email?: string; user_metadata?: Record<string, any> } | null } }) => {
-      const user = data.user;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    supabase.auth.getUser().then((res: any) => {
+      const user = res?.data?.user;
       if (user?.email) {
-        const meta = user.user_metadata ?? {};
-        setProfileEmail(user.email);
-        setProfileName(meta.full_name ?? meta.name ?? user.email.split("@")[0]);
+        const meta: Record<string, string> = user.user_metadata ?? {};
+        setProfileEmail(user.email as string);
+        setProfileName(meta.full_name ?? meta.name ?? (user.email as string).split("@")[0]);
         if (meta.role) setProfileRole(meta.role);
         return;
       }
