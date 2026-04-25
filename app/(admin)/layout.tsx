@@ -28,7 +28,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           className="flex items-center gap-3 px-5 border-b flex-shrink-0"
           style={{
             height: 52,
-            background: "var(--sidebar)",
+            background: "var(--surface)",
             borderColor: "var(--border)",
             boxShadow: "0 1px 0 var(--border)",
           }}
@@ -37,9 +37,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span
               className="flex items-center gap-1.5 text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border flex-shrink-0"
               style={{
-                background: "rgba(124,58,237,0.12)",
-                color: "#a78bfa",
-                borderColor: "rgba(124,58,237,0.25)",
+                background: "rgba(250,204,21,0.12)",
+                color: "#facc15",
+                borderColor: "rgba(250,204,21,0.25)",
               }}
             >
               <Shield size={9} />
