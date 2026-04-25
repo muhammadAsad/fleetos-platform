@@ -123,6 +123,9 @@ export default function FleetMap({ onTruckClick, trucks: externalTrucks, centerL
   useEffect(() => {
     if (!mapReady || !centerMarker || centerLat == null || centerLng == null) return;
 
+    const lat = centerLat as number;
+    const lng = centerLng as number;
+
     async function addCenter() {
       const L = (await import("leaflet")).default;
       const map = mapRef.current;
@@ -136,11 +139,11 @@ export default function FleetMap({ onTruckClick, trucks: externalTrucks, centerL
       `;
       el.style.cssText = "cursor:default;";
 
-      centerMarkerRef.current = L.marker([centerLat, centerLng], {
+      centerMarkerRef.current = L.marker([lat, lng], {
         icon: L.divIcon({ html: el.outerHTML, className: "", iconSize: [18, 18], iconAnchor: [9, 9] }),
       }).addTo(map);
 
-      map.setView([centerLat, centerLng], Math.max(zoom, 7));
+      map.setView([lat, lng], Math.max(zoom, 7));
     }
     addCenter();
   }, [mapReady, centerLat, centerLng, centerMarker]);
