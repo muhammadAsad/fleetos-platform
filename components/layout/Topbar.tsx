@@ -50,8 +50,8 @@ export default function Topbar({ title }: TopbarProps) {
   const [showUser, setShowUser] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
-  const [profileName, setProfileName] = useState("Admin User");
-  const [profileEmail, setProfileEmail] = useState("admin@fleetos.com");
+  const [profileName, setProfileName] = useState("");
+  const [profileEmail, setProfileEmail] = useState("");
   const [profileRole, setProfileRole] = useState("Fleet Administrator");
   const [profileSaving, setProfileSaving] = useState(false);
   const [profileSaved, setProfileSaved] = useState(false);
@@ -59,6 +59,20 @@ export default function Topbar({ title }: TopbarProps) {
 
   const alertsRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
+
+  // Load auth user
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      const user = data.user;
+      if (!user) return;
+      const meta = user.user_metadata ?? {};
+      setProfileEmail(user.email ?? "");
+      setProfileName(
+        meta.full_name ?? meta.name ?? user.email?.split("@")[0] ?? "User"
+      );
+      if (meta.role) setProfileRole(meta.role);
+    });
+  }, []);
 
   // Clock
   useEffect(() => {
