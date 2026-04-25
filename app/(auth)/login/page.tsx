@@ -23,6 +23,7 @@ export default function LoginPage() {
       setError(err.message);
       setLoading(false);
     } else {
+      localStorage.setItem("fleetos_user_email", email);
       router.push("/dashboard");
     }
   }
@@ -36,7 +37,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="flex items-center justify-center gap-2.5 mb-8">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "var(--accent)" }}>
-            <Truck size={18} className="text-white" />
+            <Truck size={18} style={{ color: "#000" }} />
           </div>
           <span className="font-display font-bold text-2xl text-text">FleetOS</span>
         </div>

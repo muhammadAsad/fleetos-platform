@@ -60,17 +60,23 @@ export default function Topbar({ title }: TopbarProps) {
   const alertsRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
 
-  // Load auth user
+  // Load auth user — real Supabase first, fall back to localStorage (demo/mock mode)
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       const user = data.user;
-      if (!user) return;
-      const meta = user.user_metadata ?? {};
-      setProfileEmail(user.email ?? "");
-      setProfileName(
-        meta.full_name ?? meta.name ?? user.email?.split("@")[0] ?? "User"
-      );
-      if (meta.role) setProfileRole(meta.role);
+      if (user?.email) {
+        const meta = user.user_metadata ?? {};
+        setProfileEmail(user.email);
+        setProfileName(meta.full_name ?? meta.name ?? user.email.split("@")[0]);
+        if (meta.role) setProfileRole(meta.role);
+        return;
+      }
+      // Mock/demo mode: use email stored at login
+      const storedEmail = localStorage.getItem("fleetos_user_email") ?? "";
+      if (storedEmail) {
+        setProfileEmail(storedEmail);
+        setProfileName(storedEmail.split("@")[0]);
+      }
     });
   }, []);
 
