@@ -62,7 +62,7 @@ export default function Topbar({ title }: TopbarProps) {
 
   // Load auth user — real Supabase first, fall back to localStorage (demo/mock mode)
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(({ data }: { data: { user: { email?: string; user_metadata?: Record<string, any> } | null } }) => {
       const user = data.user;
       if (user?.email) {
         const meta = user.user_metadata ?? {};
