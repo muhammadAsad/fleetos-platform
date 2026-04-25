@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["mapbox-gl"],
+  transpilePackages: ["leaflet", "react-leaflet"],
   eslint: {
     // Warnings don't block production build
     ignoreDuringBuilds: true,
