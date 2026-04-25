@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const ADMIN_SECRET = process.env.ADMIN_SECRET ?? "fleetos-admin-2024";
-const COOKIE_VALUE = process.env.ADMIN_COOKIE_VALUE ?? "fleetos-admin-ok";
+const ADMIN_SECRET = "fleetos-admin-2024";
+const COOKIE_VALUE = "fleetos-admin-ok";
 const COOKIE_NAME = "fleetos-admin";
 
 // POST /api/admin-auth  { secret: string }
