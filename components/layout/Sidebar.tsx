@@ -48,14 +48,20 @@ function NavLink({ item, depth = 0 }: { item: NavItem; depth?: number }) {
       <div>
         <button
           onClick={() => setOpen(!open)}
-          className={cn("w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all", "text-text2 hover:text-text hover:bg-surface2", open && "text-text")}
+          className={cn(
+            "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all duration-200",
+            open ? "text-white" : "text-[#9ca3af] hover:text-white hover:bg-[#1f2937]"
+          )}
         >
           <item.icon size={14} className="flex-shrink-0" />
           <span className="flex-1 text-left">{item.label}</span>
-          {open ? <ChevronDown size={12} className="text-text3" /> : <ChevronRight size={12} className="text-text3" />}
+          {open
+            ? <ChevronDown size={12} className="opacity-50" />
+            : <ChevronRight size={12} className="opacity-40" />
+          }
         </button>
         {open && (
-          <div className="ml-4 mt-0.5 space-y-0.5 border-l pl-3" style={{ borderColor: "var(--border2)" }}>
+          <div className="ml-4 mt-0.5 space-y-0.5 border-l pl-3" style={{ borderColor: "#1f2937" }}>
             {item.children.map((child) => <NavLink key={child.href} item={child} depth={depth + 1} />)}
           </div>
         )}
@@ -67,26 +73,27 @@ function NavLink({ item, depth = 0 }: { item: NavItem; depth?: number }) {
     <Link
       href={item.href!}
       className={cn(
-        "flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all relative",
-        isActive ? "text-accent font-medium" : "text-text2 hover:text-text hover:bg-surface2"
+        "flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all duration-200 relative",
+        isActive
+          ? "font-bold"
+          : "text-[#9ca3af] hover:text-white hover:bg-[#1f2937]"
       )}
-      style={isActive ? { background: "var(--accent-glow)" } : undefined}
+      style={isActive ? { background: "#facc15", color: "#000000" } : undefined}
     >
-      {isActive && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-full" style={{ background: "var(--accent)" }} />}
       <item.icon size={14} className="flex-shrink-0" />
       <span className="flex-1">{item.label}</span>
       {item.soon && (
-        <span className="text-[9px] font-mono font-bold px-1 py-0.5 rounded border" style={{ background: "rgba(6,182,212,0.1)", color: "var(--cyan)", borderColor: "rgba(6,182,212,0.2)" }}>
+        <span className="text-[9px] font-mono font-bold px-1 py-0.5 rounded border" style={{ background: "rgba(6,182,212,0.1)", color: "#06b6d4", borderColor: "rgba(6,182,212,0.2)" }}>
           SOON
         </span>
       )}
       {item.badge !== undefined && (
         <span className={cn(
           "text-[10px] font-mono font-bold px-1.5 py-0.5 rounded",
-          item.badgeVariant === "red"   ? "bg-red/10 text-[#ef4444]" :
-          item.badgeVariant === "cyan"  ? "bg-cyan/10 text-cyan" :
-          item.badgeVariant === "green" ? "bg-green/10 text-green" :
-          "bg-yellow/10 text-yellow"
+          item.badgeVariant === "red"   ? "bg-red-500/10 text-red-400" :
+          item.badgeVariant === "cyan"  ? "bg-cyan-500/10 text-cyan-400" :
+          item.badgeVariant === "green" ? "bg-green-500/10 text-green-400" :
+          "bg-yellow-400/10 text-yellow-400"
         )}>
           {item.badge}
         </span>
@@ -112,7 +119,6 @@ export default function Sidebar() {
   }, []);
 
   function flagOn(key: string) {
-    // If flags haven't loaded yet or key not in map, default true
     return key in enabledFlags ? enabledFlags[key] : true;
   }
 
@@ -136,12 +142,12 @@ export default function Sidebar() {
     {
       label: "Driver Logs",
       items: [
-        { icon: Clock,        label: "Driver HoS",         href: "/hos"    },
-        { icon: FileText,     label: "Logs",                href: "/logs"   },
-        { icon: AlertTriangle,label: "Unidentified Events", href: "/events" },
-        { icon: Bell,         label: "Driver Alarms",       href: "/alerts" },
-        { icon: ClipboardCheck,label: "DVIR",               href: "/dvir"   },
-        ...(flagOn("video_library")   ? [{ icon: Video,      label: "Video Library",    href: "/video"  }] : []),
+        { icon: Clock,         label: "Driver HoS",         href: "/hos"    },
+        { icon: FileText,      label: "Logs",                href: "/logs"   },
+        { icon: AlertTriangle, label: "Unidentified Events", href: "/events" },
+        { icon: Bell,          label: "Driver Alarms",       href: "/alerts" },
+        { icon: ClipboardCheck,label: "DVIR",                href: "/dvir"   },
+        ...(flagOn("video_library") ? [{ icon: Video, label: "Video Library", href: "/video" }] : []),
       ],
     },
     {
@@ -163,16 +169,16 @@ export default function Sidebar() {
   return (
     <aside
       className="flex flex-col h-full"
-      style={{ width: 224, background: "var(--sidebar)", borderRight: "1px solid var(--border)", flexShrink: 0 }}
+      style={{ width: 224, background: "#0f172a", borderRight: "1px solid #1f2937", flexShrink: 0 }}
     >
       {/* Logo */}
-      <div className="flex items-center gap-2.5 px-4 py-[14px] border-b" style={{ borderColor: "var(--border)" }}>
-        <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "var(--accent)" }}>
-          <Truck size={14} className="text-white" />
+      <div className="flex items-center gap-2.5 px-4 py-[14px] border-b" style={{ borderColor: "#1f2937" }}>
+        <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#facc15" }}>
+          <Truck size={14} style={{ color: "#000" }} />
         </div>
         <div className="min-w-0">
-          <span className="font-display font-bold text-[15px] tracking-tight text-text block leading-none">FleetOS</span>
-          <span className="text-[9px] font-mono text-text3 tracking-wide">ELD PLATFORM</span>
+          <span className="font-display font-bold text-[15px] tracking-tight text-white block leading-none">FleetOS</span>
+          <span className="text-[9px] font-mono tracking-wide" style={{ color: "#6b7280" }}>ELD PLATFORM</span>
         </div>
       </div>
 
@@ -181,7 +187,7 @@ export default function Sidebar() {
         {NAV_GROUPS.map((group, gi) => (
           <div key={gi}>
             {group.label && (
-              <p className="px-3 mb-1 text-[9px] font-mono font-semibold text-text3 uppercase tracking-[0.12em]">
+              <p className="px-3 mb-1 text-[9px] font-mono font-semibold uppercase tracking-[0.12em]" style={{ color: "#6b7280" }}>
                 {group.label}
               </p>
             )}
@@ -195,23 +201,26 @@ export default function Sidebar() {
       </nav>
 
       {/* Bottom */}
-      <div className="px-2 py-2 border-t space-y-0.5" style={{ borderColor: "var(--border)" }}>
+      <div className="px-2 py-2 border-t space-y-0.5" style={{ borderColor: "#1f2937" }}>
         <NavLink item={{ icon: HelpCircle, label: "Help & Support", href: "/help" }} />
 
         {/* Settings accordion */}
         <button
           onClick={() => setSettingsOpen(!settingsOpen)}
           className={cn(
-            "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all",
-            settingsOpen ? "text-text bg-surface2" : "text-text2 hover:text-text hover:bg-surface2"
+            "w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all duration-200",
+            settingsOpen ? "text-white bg-[#1f2937]" : "text-[#9ca3af] hover:text-white hover:bg-[#1f2937]"
           )}
         >
           <Settings size={14} className="flex-shrink-0" />
           <span className="flex-1 text-left">Settings</span>
-          {settingsOpen ? <ChevronDown size={12} className="text-text3" /> : <ChevronRight size={12} className="text-text3" />}
+          {settingsOpen
+            ? <ChevronDown size={12} className="opacity-50" />
+            : <ChevronRight size={12} className="opacity-40" />
+          }
         </button>
         {settingsOpen && (
-          <div className="ml-4 border-l pl-3 space-y-0.5" style={{ borderColor: "var(--border2)" }}>
+          <div className="ml-4 border-l pl-3 space-y-0.5" style={{ borderColor: "#1f2937" }}>
             {SETTINGS_ITEMS.map((item) => (
               <NavLink key={item.href} item={item} />
             ))}
@@ -220,7 +229,7 @@ export default function Sidebar() {
       </div>
 
       {/* Demo + Company badge */}
-      <div className="px-3 pb-3 pt-2 border-t space-y-2" style={{ borderColor: "var(--border)" }}>
+      <div className="px-3 pb-3 pt-2 border-t space-y-2" style={{ borderColor: "#1f2937" }}>
         <button
           onClick={async () => {
             try {
@@ -228,8 +237,8 @@ export default function Sidebar() {
               window.location.href = "/dashboard";
             } catch {}
           }}
-          className="w-full flex items-center justify-center gap-2 py-2 rounded-xl text-[13px] font-semibold text-white transition-all hover:opacity-90 active:scale-95"
-          style={{ background: "linear-gradient(135deg, var(--accent), #7c3aed)", boxShadow: "0 2px 12px rgba(37,99,235,0.3)" }}
+          className="w-full flex items-center justify-center gap-2 py-2 rounded-xl text-[13px] font-bold text-black transition-all hover:opacity-90 active:scale-95"
+          style={{ background: "#facc15", boxShadow: "0 2px 12px rgba(250,204,21,0.25)" }}
         >
           <Zap size={13} />
           Try Demo Fleet
@@ -238,14 +247,14 @@ export default function Sidebar() {
         {/* Company badge */}
         <div
           className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg border"
-          style={{ background: "var(--surface2)", borderColor: "var(--border2)" }}
+          style={{ background: "#1f2937", borderColor: "#374151" }}
         >
-          <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 text-[10px] font-bold text-white" style={{ background: "var(--accent)" }}>
+          <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 text-[10px] font-bold text-black" style={{ background: "#facc15" }}>
             V
           </div>
           <div className="min-w-0">
-            <p className="text-[11px] font-semibold text-text truncate">VER 89569</p>
-            <p className="text-[9px] font-mono text-text3">Active plan</p>
+            <p className="text-[11px] font-semibold text-white truncate">VER 89569</p>
+            <p className="text-[9px] font-mono" style={{ color: "#6b7280" }}>Active plan</p>
           </div>
           <div className="w-1.5 h-1.5 rounded-full ml-auto flex-shrink-0" style={{ background: "#10b981", boxShadow: "0 0 6px #10b981" }} />
         </div>

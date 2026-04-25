@@ -6,56 +6,57 @@
 
 /* ─── Dark mode (default) ──────────────────────────────────────────────────── */
 :root {
-  --bg:           #060810;
-  --sidebar:      #0a0e18;
-  --surface:      #0f1624;
-  --surface2:     #151e30;
-  --surface3:     #1a2540;
-  --border:       #1d2b40;
-  --border2:      #243350;
+  --bg:           #0f172a;
+  --sidebar:      #0f172a;
+  --surface:      #111827;
+  --surface2:     #1f2937;
+  --surface3:     #374151;
+  --border:       #1f2937;
+  --border2:      #374151;
 
-  --accent:       #2563eb;
-  --accent-light: #3b82f6;
-  --accent-glow:  rgba(37,99,235,0.15);
+  --accent:       #facc15;
+  --accent-light: #eab308;
+  --accent-glow:  rgba(250,204,21,0.10);
+  --accent-text:  #000000;
 
   --green:   #10b981;
-  --yellow:  #f59e0b;
+  --yellow:  #facc15;
   --red:     #ef4444;
   --cyan:    #06b6d4;
   --purple:  #8b5cf6;
   --orange:  #f97316;
 
-  --text:    #f0f4fc;
-  --text2:   #8a9ab8;
-  --text3:   #3f5070;
+  --text:    #f9fafb;
+  --text2:   #9ca3af;
+  --text3:   #6b7280;
 
-  --shadow-sm: 0 1px 4px  rgba(0,0,0,0.50);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.50);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.60);
-  --shadow-xl: 0 20px 60px rgba(0,0,0,0.70);
+  --shadow-sm: 0 1px 4px  rgba(0,0,0,0.60);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.60);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.70);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.80);
 
-  /* Component-level shadow tokens */
-  --shadow-card:     none;
+  --shadow-card:     0 1px 3px rgba(0,0,0,0.40);
   --shadow-header:   0 1px 0 var(--border);
   --shadow-sidebar:  none;
-  --shadow-dropdown: 0 20px 60px rgba(0,0,0,0.70);
-  --shadow-modal:    0 24px 80px rgba(0,0,0,0.80);
-  --modal-overlay:   rgba(0,0,0,0.75);
+  --shadow-dropdown: 0 20px 60px rgba(0,0,0,0.80);
+  --shadow-modal:    0 24px 80px rgba(0,0,0,0.90);
+  --modal-overlay:   rgba(0,0,0,0.80);
 }
 
 /* ─── Light mode overrides ─────────────────────────────────────────────────── */
 [data-theme="light"] {
-  --bg:           #f8fafc;
-  --sidebar:      #ffffff;
+  --bg:           #f1f5f9;
+  --sidebar:      #0f172a;
   --surface:      #ffffff;
-  --surface2:     #f1f5f9;
+  --surface2:     #f8fafc;
   --surface3:     #e2e8f0;
   --border:       #e5e7eb;
   --border2:      #d1d5db;
 
-  --accent:       #2563eb;
-  --accent-light: #3b82f6;
-  --accent-glow:  rgba(37,99,235,0.10);
+  --accent:       #facc15;
+  --accent-light: #eab308;
+  --accent-glow:  rgba(250,204,21,0.12);
+  --accent-text:  #000000;
 
   --text:    #0f172a;
   --text2:   #475569;
@@ -68,10 +69,10 @@
 
   --shadow-card:     0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-header:   0 1px 0 var(--border), 0 2px 8px rgba(0,0,0,0.04);
-  --shadow-sidebar:  1px 0 0 var(--border), 2px 0 12px rgba(0,0,0,0.04);
+  --shadow-sidebar:  none;
   --shadow-dropdown: 0 4px 6px rgba(0,0,0,0.05), 0 10px 30px rgba(0,0,0,0.10);
   --shadow-modal:    0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
-  --modal-overlay:   rgba(15,23,42,0.45);
+  --modal-overlay:   rgba(15,23,42,0.55);
 }
 
 /* ─── Base reset ────────────────────────────────────────────────────────────── */
@@ -93,7 +94,7 @@ html, body {
 ::-webkit-scrollbar-thumb:hover  { background: var(--border2); }
 
 /* ─── Selection / focus ─────────────────────────────────────────────────────── */
-::selection    { background: rgba(37,99,235,0.25); }
+::selection    { background: rgba(250,204,21,0.25); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ─── Font utilities ────────────────────────────────────────────────────────── */
@@ -105,45 +106,44 @@ html, body {
 
 /* ════════════════════════════════════════════════════════════════════════════
    LIGHT MODE — component-level overrides
-   These fix the hardcoded dark rgba() values in inline JSX styles so the
-   light theme looks clean without touching any component file.
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* Layout shell: header + sidebar ─────────────────────────────────────────── */
+/* Sidebar stays dark in light mode */
+[data-theme="light"] aside {
+  background: #0f172a !important;
+  box-shadow: 1px 0 0 rgba(255,255,255,0.05) !important;
+}
+
+/* Header */
 [data-theme="light"] header {
   box-shadow: var(--shadow-header) !important;
 }
-[data-theme="light"] aside {
-  box-shadow: var(--shadow-sidebar) !important;
-}
 
-/* Cards — every bordered rounded panel gets a subtle elevation ────────────── */
-[data-theme="light"] .rounded-xl {
-  box-shadow: var(--shadow-card);
-}
+/* Cards */
+[data-theme="light"] .rounded-xl,
 [data-theme="light"] .rounded-2xl {
   box-shadow: var(--shadow-card);
 }
 
-/* Dropdown menus (absolute-positioned, bordered, rounded) ─────────────────── */
+/* Dropdown menus */
 [data-theme="light"] .absolute.rounded-xl.border,
 [data-theme="light"] .absolute.rounded-xl.border.overflow-hidden {
   box-shadow: var(--shadow-dropdown) !important;
 }
 
-/* Modal dialog panels ─────────────────────────────────────────────────────── */
+/* Modal dialog panels */
 [data-theme="light"] .fixed > .relative.rounded-2xl,
 [data-theme="light"] .fixed > .relative.rounded-xl {
   box-shadow: var(--shadow-modal) !important;
 }
 
-/* Modal backdrop ──────────────────────────────────────────────────────────── */
+/* Modal backdrop */
 [data-theme="light"] .fixed.inset-0[style*="rgba(0,0"] {
   background: var(--modal-overlay) !important;
   backdrop-filter: blur(4px);
 }
 
-/* Table rows ──────────────────────────────────────────────────────────────── */
+/* Table rows */
 [data-theme="light"] tbody tr:hover {
   background: var(--surface2) !important;
 }
@@ -151,12 +151,7 @@ html, body {
   background: var(--surface);
 }
 
-/* Sidebar active nav item ─────────────────────────────────────────────────── */
-[data-theme="light"] a[style*="accent-glow"] {
-  background: rgba(37,99,235,0.08) !important;
-}
-
-/* Input / select / textarea ───────────────────────────────────────────────── */
+/* Input / select / textarea */
 [data-theme="light"] input:not([type="checkbox"]):not([type="radio"]),
 [data-theme="light"] select,
 [data-theme="light"] textarea {
@@ -168,7 +163,7 @@ html, body {
 [data-theme="light"] select:focus,
 [data-theme="light"] textarea:focus {
   border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.12) !important;
+  box-shadow: 0 0 0 3px rgba(250,204,21,0.15) !important;
   outline: none !important;
 }
 [data-theme="light"] input::placeholder,
@@ -176,40 +171,9 @@ html, body {
   color: var(--text3) !important;
 }
 
-/* Skeleton loaders ────────────────────────────────────────────────────────── */
-[data-theme="light"] .animate-pulse {
-  background: var(--surface3) !important;
-}
-
-/* Toggle / switch track ───────────────────────────────────────────────────── */
-[data-theme="light"] .rounded-full[style*="surface3"] {
-  background: var(--surface3) !important;
-}
-
-/* Badge / pill overrides to keep dark badge colours readable in light mode ── */
-[data-theme="light"] .font-mono.font-semibold[style*="rgba(16,185"] {
-  /* green badges keep their colour — already high contrast */
-}
-
-/* Admin sidebar: keep purple accent consistent in light mode ──────────────── */
-[data-theme="light"] nav a[style*="rgba(124,58,237"] {
-  background: rgba(124,58,237,0.10) !important;
-}
-
-/* Topbar search pill ──────────────────────────────────────────────────────── */
-[data-theme="light"] .rounded-full.border[style] {
-  background: var(--surface2) !important;
-  border-color: var(--border) !important;
-}
-
-/* Alert / notification panel ──────────────────────────────────────────────── */
+/* Alert / notification panel */
 [data-theme="light"] .max-h-72 {
   background: var(--surface) !important;
-}
-
-/* Tab switcher pills ──────────────────────────────────────────────────────── */
-[data-theme="light"] button[style*="surface2"].shadow {
-  box-shadow: 0 1px 4px rgba(0,0,0,0.10) !important;
 }
 
 /* ─── Mapbox popup reset ────────────────────────────────────────────────────── */

@@ -203,10 +203,10 @@ export default function Topbar({ title }: TopbarProps) {
             className={cn(
               "relative w-8 h-8 rounded-lg border flex items-center justify-center transition-all",
               showAlerts
-                ? "border-accent/50 bg-accent/10 text-accent"
+                ? "border-yellow-400/50 bg-yellow-400/10 text-yellow-400"
                 : "text-text2 hover:text-text hover:bg-surface2"
             )}
-            style={{ borderColor: showAlerts ? "rgba(37,99,235,0.5)" : "var(--border)" }}
+            style={{ borderColor: showAlerts ? "rgba(250,204,21,0.5)" : "var(--border)" }}
           >
             <Bell size={14} />
             {unread > 0 && (
@@ -241,7 +241,7 @@ export default function Topbar({ title }: TopbarProps) {
                 </div>
                 <div className="flex items-center gap-2">
                   {unread > 0 && (
-                    <button onClick={markAllRead} className="text-xs hover:underline" style={{ color: "var(--accent)" }}>
+                    <button onClick={markAllRead} className="text-xs hover:underline" style={{ color: "#facc15" }}>
                       Mark all read
                     </button>
                   )}
@@ -278,7 +278,7 @@ export default function Topbar({ title }: TopbarProps) {
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-2">
                             <p className="text-sm font-medium text-text truncate">{alert.driver}</p>
-                            {!alert.read && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "var(--accent)" }} />}
+                            {!alert.read && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#facc15" }} />}
                           </div>
                           <p className="text-xs text-text3 mt-0.5">{alert.message}</p>
                           {alert.time && <p className="text-[10px] font-mono text-text3 mt-1">{alert.time}</p>}
@@ -303,8 +303,8 @@ export default function Topbar({ title }: TopbarProps) {
             }}
           >
             <div
-              className="w-6 h-6 rounded-md flex items-center justify-center text-[11px] font-bold font-display text-white flex-shrink-0"
-              style={{ background: "var(--accent)" }}
+              className="w-6 h-6 rounded-md flex items-center justify-center text-[11px] font-bold font-display flex-shrink-0"
+              style={{ background: "#facc15", color: "#000" }}
             >
               {avatar}
             </div>
@@ -327,8 +327,8 @@ export default function Topbar({ title }: TopbarProps) {
               <div className="px-4 py-3 border-b" style={{ borderColor: "var(--border)" }}>
                 <div className="flex items-center gap-2.5">
                   <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold font-display text-white flex-shrink-0"
-                    style={{ background: "linear-gradient(135deg, var(--accent), #7c3aed)" }}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold font-display flex-shrink-0"
+                    style={{ background: "#facc15", color: "#000" }}
                   >
                     {avatar}
                   </div>
@@ -339,7 +339,7 @@ export default function Topbar({ title }: TopbarProps) {
                 </div>
                 <span
                   className="inline-block mt-2 text-[9px] font-mono font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide"
-                  style={{ background: "var(--accent-glow)", color: "var(--accent)" }}
+                  style={{ background: "rgba(250,204,21,0.12)", color: "#facc15" }}
                 >
                   {profileRole}
                 </span>
@@ -410,8 +410,8 @@ export default function Topbar({ title }: TopbarProps) {
               {/* Avatar row */}
               <div className="flex items-center gap-4">
                 <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold font-display text-white flex-shrink-0"
-                  style={{ background: "linear-gradient(135deg, var(--accent), #7c3aed)" }}
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold font-display flex-shrink-0"
+                  style={{ background: "#facc15", color: "#000" }}
                 >
                   {avatar}
                 </div>
@@ -421,7 +421,7 @@ export default function Topbar({ title }: TopbarProps) {
                   <button
                     type="button"
                     className="flex items-center gap-1.5 mt-2 text-xs hover:underline"
-                    style={{ color: "var(--accent)" }}
+                    style={{ color: "#facc15" }}
                   >
                     <Camera size={11} />
                     Change avatar
@@ -441,7 +441,7 @@ export default function Topbar({ title }: TopbarProps) {
                     onChange={(e) => setProfileName(e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border text-sm text-text outline-none transition-all"
                     style={{ background: "var(--surface2)", borderColor: "var(--border2)", color: "var(--text)" }}
-                    onFocus={(e) => (e.target.style.borderColor = "rgba(37,99,235,0.6)")}
+                    onFocus={(e) => (e.target.style.borderColor = "rgba(250,204,21,0.6)")}
                     onBlur={(e) => (e.target.style.borderColor = "var(--border2)")}
                     required
                   />
@@ -456,7 +456,7 @@ export default function Topbar({ title }: TopbarProps) {
                     onChange={(e) => setProfileEmail(e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border text-sm outline-none transition-all"
                     style={{ background: "var(--surface2)", borderColor: "var(--border2)", color: "var(--text)" }}
-                    onFocus={(e) => (e.target.style.borderColor = "rgba(37,99,235,0.6)")}
+                    onFocus={(e) => (e.target.style.borderColor = "rgba(250,204,21,0.6)")}
                     onBlur={(e) => (e.target.style.borderColor = "var(--border2)")}
                     required
                   />
@@ -470,7 +470,7 @@ export default function Topbar({ title }: TopbarProps) {
                     onChange={(e) => setProfileRole(e.target.value)}
                     className="w-full px-3 py-2.5 rounded-lg border text-sm outline-none transition-all cursor-pointer"
                     style={{ background: "var(--surface2)", borderColor: "var(--border2)", color: "var(--text)" }}
-                    onFocus={(e) => (e.target.style.borderColor = "rgba(37,99,235,0.6)")}
+                    onFocus={(e) => (e.target.style.borderColor = "rgba(250,204,21,0.6)")}
                     onBlur={(e) => (e.target.style.borderColor = "var(--border2)")}
                   >
                     <option value="Fleet Administrator">Fleet Administrator</option>
@@ -486,8 +486,8 @@ export default function Topbar({ title }: TopbarProps) {
                 <button
                   type="submit"
                   disabled={profileSaving || profileSaved}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 disabled:opacity-70 active:scale-95"
-                  style={{ background: profileSaved ? "#10b981" : "var(--accent)" }}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-70 active:scale-95"
+                  style={{ background: profileSaved ? "#10b981" : "#facc15", color: profileSaved ? "#fff" : "#000" }}
                 >
                   {profileSaving ? (
                     <Loader2 size={14} className="animate-spin" />

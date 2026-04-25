@@ -47,9 +47,9 @@ export default function AdminLoginPage() {
         <div className="text-center mb-8">
           <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
-            style={{ background: "linear-gradient(135deg, #7c3aed, #4f46e5)" }}
+            style={{ background: "#facc15" }}
           >
-            <Shield size={24} className="text-white" />
+            <Shield size={24} style={{ color: "#000" }} />
           </div>
           <h1 className="font-display font-bold text-xl text-text">Admin Access</h1>
           <p className="text-sm text-text3 mt-1">Restricted area — authorized personnel only</p>
@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
                 autoComplete="current-password"
                 className="w-full px-4 py-3 rounded-xl border text-sm pr-10 outline-none transition-all"
                 style={{ background: "var(--surface2)", borderColor: "var(--border2)", color: "var(--text)" }}
-                onFocus={(e) => (e.target.style.borderColor = "rgba(124,58,237,0.6)")}
+                onFocus={(e) => (e.target.style.borderColor = "rgba(250,204,21,0.6)")}
                 onBlur={(e) => (e.target.style.borderColor = "var(--border2)")}
                 required
               />
@@ -113,8 +113,8 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading || success || !secret}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 disabled:opacity-50 active:scale-95"
-            style={{ background: "linear-gradient(135deg, #7c3aed, #4f46e5)" }}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90 disabled:opacity-50 active:scale-95"
+            style={{ background: "#facc15", color: "#000" }}
           >
             {loading ? (
               <Loader2 size={15} className="animate-spin" />

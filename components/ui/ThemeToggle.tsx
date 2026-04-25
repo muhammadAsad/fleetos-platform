@@ -29,7 +29,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       className="w-8 h-8 rounded-lg border flex items-center justify-center transition-all hover:bg-surface2"
-      style={{ borderColor: "var(--border)", color: "var(--text2)" }}
+      style={{ borderColor: "var(--border)", color: theme === "dark" ? "#facc15" : "var(--text2)" }}
     >
       {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
     </button>
